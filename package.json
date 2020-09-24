@@ -2,6 +2,7 @@
   "name": "calculadora",
   "version": "0.1.0",
   "private": true,
+  "home": "http://localhost/build/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -10,6 +11,7 @@
     "chart.js": "^2.9.3",
     "mathjs": "^7.2.0",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.10.0",
     "react-chartkick": "^0.4.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"

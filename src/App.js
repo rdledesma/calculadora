@@ -44,17 +44,18 @@ function App() {
       return 1;
     }
     if (x<0) {
-      return 1
+      return -1
     }
   }
   
   
-  const COS0 = (M, U, N, P, V)=>{
-    if(M <= 0){
+  const COS0 = (N, V, O, Q, W)=>{
+    console.log("N",N, "V",V, "O",O, "Q",Q, "W",W);
+    if(N <= 0){
       return 0;
     }
     else{
-      return M * cos(U) + sin(N) * sin(U) * cos(P - radians(V))
+      return N * cos(V) + sin(O) * sin(V) * cos(Q - radians(W))
     }
       
   }
@@ -89,7 +90,7 @@ function App() {
 
     const declinacionRadianes = radians(declinacion);
     const EOs = 1 + 0.033 * cos(2 * PI * data.jul / 365);
-
+    
     const elevacionRadianes = radians(data.elev);
     const latRadianes = radians(data.lat)
 
@@ -105,9 +106,19 @@ function App() {
       const anguloHorarioRadianes = radians(anguloHorario)
       const cosOz = (cos(latRadianes) * cos(declinacionRadianes) * cos(anguloHorarioRadianes)) + (sin(latRadianes) * sin(declinacionRadianes));
       const OzRadianes = acos(cosOz);
+
+      console.log("M", anguloHorarioRadianes);
+      console.log("N", cosOz);
+      console.log("C", latRadianes);
+      console.log("K", declinacionRadianes);
+      console.log("O", OzRadianes);
+      console.log("C", latRadianes);
+
+
       const azimutDelSol = SIGNO(anguloHorarioRadianes) * (abs(acos((cosOz * sin(latRadianes) - sin(declinacionRadianes)) / (sin(OzRadianes) * cos(latRadianes)))))
       const azimutDelSolGrados = degrees(azimutDelSol)
-      const cosO = COS0(cosOz, elevacionRadianes, OzRadianes, azimutDelSol, data.azit)
+      //const cosO = COS0(cosOz, elevacionRadianes, OzRadianes, azimutDelSol, parseFloat(data.azit))
+      const cosO = COS0(cosOz, elevacionRadianes, OzRadianes, azimutDelSol, parseFloat(data.azit))
       
       dataIrradianciaInclinado.push(irradianciaInclinado(TSIs, EOs, cosO))
       dataIrradianciaParalelo.push(irradianciaParalelo(TSIs, EOs, cosOz))
@@ -115,6 +126,8 @@ function App() {
 
       setDataInclinada(dataIrradianciaInclinado)
       setDataParalela(dataIrradianciaParalelo)
+
+      
 
     }
     
@@ -154,6 +167,7 @@ function App() {
       <div className="row container">
         <div className="col text-center">
         <h1 className="text-center">Irradiancia</h1>
+        
         </div>
       </div>
       <div className="row m-2">
